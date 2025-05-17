@@ -5,10 +5,25 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/select.css">
 </head>
-<body{% if page.permalink == '/select.html' %} class="select-page"{% endif %}>
+<body
+  {% if page.permalink == '/select.html' %} class="select-page"
+  {% elsif page.permalink == '/methodology/' %} class="methodology-page"
+  {% endif %}
+>
+  <!-- Top‐right nav -->
+  <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
+
+  <!-- Back to Music (only on methodology page) -->
+  {% if page.permalink == '/methodology/' %}
+    <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
+  {% endif %}
+
   <!-- Full-screen container for portrait → background -->
-  <div id="background-container"{% if page.permalink == '/select.html' %} class="background-mode"{% endif %}>
+  <div id="background-container"
+       {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
+  >
     <img
       id="landing-image"
       src="https://github.com/user-attachments/assets/6047ab36-561f-4652-95f7-b51c4c86b148"
@@ -21,6 +36,7 @@
     {{ content }}
   </main>
 
+  <script src="{{ site.baseurl }}/assets/js/select.js"></script>
   <script src="{{ site.baseurl }}/assets/js/main.js"></script>
 </body>
 </html>

@@ -30,7 +30,7 @@
 /* Overlay styling */
 body.darkened-background #background-container,
 body.darkened-background .wrapper {
-  filter: brightness(30%) saturate(70%);
+  filter: brightness(100%) saturate(70%);
   transition: filter 0.5s ease;
 }
 
@@ -87,4 +87,43 @@ body.darkened-background .wrapper {
 h2, h3 {
   color: #fff;
   margin-bottom: 1rem;
+}
+
+/* ↑ the “Methodology” button in the top right */
+#methodology-btn {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  background: #d680e5;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+#methodology-btn:hover {
+  background: #c06ad2;
+}
+
+/* dim the background a little more when on methodology page */
+body.methodology-page #background-container {
+  filter: brightness(15%) saturate(60%);
+}
+
+#back-to-music-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2000;
+  padding: 0.5rem 1rem;
+  background: #8fe580;
+  color: #000;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+#back-to-music-btn:hover {
+  background: #7cd362;
 }
