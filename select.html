@@ -1,0 +1,15 @@
+---
+layout: home
+---
+
+<div class="mood-select-container">
+  <h2>Select an image that best fits your mood</h2>
+  <div id="mood-images" class="mood-images"></div>
+  <button id="shuffle-btn">Shuffle</button>
+  <div id="shuffle-error" class="shuffle-error"></div>
+  <div id="focus-area" class="focus-area" style="display:none;">
+    <img id="focus-img" src="" alt="Selected mood" />
+    <audio id="mood-audio" controls autoplay></audio>
+  </div>
+</div>
+<script src="{{ site.baseurl }}/assets/js/select.js"></script>
