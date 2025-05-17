@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page.title }} — {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+</head>
+<body>
+  <!-- Full-screen container for portrait → background -->
+  <div id="background-container">
+    <img
+      id="landing-image"
+      src="https://github.com/user-attachments/assets/6047ab36-561f-4652-95f7-b51c4c86b148"
+      alt="Portrait of Bayes"
+    >
+  </div>
+
+  <!-- Your page content -->
+  <main class="wrapper">
+    {{ content }}
+  </main>
+
+  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
+</body>
+</html>
