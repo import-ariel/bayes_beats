@@ -1,0 +1,146 @@
+/*─────────────────────────────────────────────────────────────────────────────
+  1. Global Reset & Base
+─────────────────────────────────────────────────────────────────────────────*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  color: #fff;
+  background: #000;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  2. Hero (Full-Screen Banner)
+─────────────────────────────────────────────────────────────────────────────*/
+#background-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  transition: filter 1s ease-in-out, background-image 1s ease-in-out;
+}
+#landing-image {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+#background-container.background-mode {
+  filter: brightness(25%) saturate(70%);
+}
+#background-container.background-mode #landing-image {
+  opacity: 0.5;
+  transform: scale(1.1);
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  3. Main Wrapper
+─────────────────────────────────────────────────────────────────────────────*/
+.wrapper {
+  min-height: 300vh;
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 800px;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  4. Section Blocks (Intro, Rest, Button)
+─────────────────────────────────────────────────────────────────────────────*/
+#intro-text, #rest-of-text, #button-container {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s, transform 0.8s;
+  z-index: 1;
+  padding: 2rem;
+}
+#intro-text.visible,
+#rest-of-text.visible,
+#button-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+#intro-text { z-index: 3; }
+#rest-of-text { z-index: 2; }
+#button-container { z-index: 1; }
+
+/*─────────────────────────────────────────────────────────────────────────────
+  5. Scroll Cues
+─────────────────────────────────────────────────────────────────────────────*/
+.scroll-cue {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  animation: pulse 1.5s infinite;
+  opacity: 1;
+  transition: opacity 0.5s;
+  pointer-events: auto;
+}
+.scroll-cue.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes pulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50%      { transform: translateX(-50%) scale(1.2); }
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  6. Typography
+─────────────────────────────────────────────────────────────────────────────*/
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+p {
+  font-size: 1.3rem;
+  max-width: 600px;
+  margin: 1rem auto;
+}
+
+/*─────────────────────────────────────────────────────────────────────────────
+  7. Button
+─────────────────────────────────────────────────────────────────────────────*/
+#get-started {
+  display: inline-block;
+  margin: 2.5rem auto;
+  padding: 1.5rem 3.5rem;
+  font-size: 2rem;
+  background-color: #d680e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.5s, transform 0.3s, background 0.3s;
+  box-shadow: 0 4px 24px rgba(255, 122, 61, 0.15);
+}
+#get-started.visible {
+  opacity: 1;
+}
+#get-started:hover {
+  background-color: #8FE580;
+  transform: scale(1.07);
+}
