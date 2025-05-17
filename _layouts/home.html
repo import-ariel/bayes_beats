@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page.title }} — {{ site.title }}</title>
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
 </head>
-<body>
+<body{% if page.permalink == '/select.html' %} class="select-page"{% endif %}>
   <!-- Full-screen container for portrait → background -->
-  <div id="background-container">
+  <div id="background-container"{% if page.permalink == '/select.html' %} class="background-mode"{% endif %}>
     <img
       id="landing-image"
       src="https://github.com/user-attachments/assets/6047ab36-561f-4652-95f7-b51c4c86b148"

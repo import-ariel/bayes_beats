@@ -165,8 +165,8 @@ a.fade\-block {
   margin: 2rem 0;
 }
 .mood-img {
-  width: 180px;
-  height: 180px;
+  width: 250px;  /* Increased from 180px */
+  height: 250px; /* Increased from 180px */
   object-fit: cover;
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.15);
@@ -212,12 +212,13 @@ a.fade\-block {
   margin-top: 2rem;
 }
 #focus-img {
-  width: 320px;
-  height: 320px;
+  width: 450px;  /* Increased from 320px */
+  height: 450px; /* Increased from 320px */
   object-fit: cover;
   border-radius: 24px;
   animation: twirl-in 0.8s cubic-bezier(.68,-0.55,.27,1.55);
 }
+
 @keyframes twirl-in {
   0% { transform: scale(0.2) rotate(-360deg); opacity: 0; }
   80% { transform: scale(1.1) rotate(20deg); opacity: 1; }
@@ -225,5 +226,44 @@ a.fade\-block {
 }
 #mood-audio {
   margin-top: 1.5rem;
-  width: 320px;
+  width: 450px; /* Increased from 320px */
+}
+
+.darkened-background {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.mood-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.focus-area {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 80%;
+  text-align: center;
+}
+
+body.select-page {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.select-page #background-container {
+  filter: brightness(25%) saturate(70%);
+}
+
+.mood-select-container {
+  color: white;
+  position: relative;
+  z-index: 10;
 }
