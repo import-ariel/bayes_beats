@@ -70,14 +70,18 @@ function addBackButton() {
   const btn = document.createElement('button');
   btn.id = 'back-button';
   btn.textContent = 'Back to Selection';
+
   btn.addEventListener('click', () => {
-    // undo dims/overlay/audio
+    // 1) undo dims + overlay + audio
     document.body.classList.remove('darkened-background');
     document.querySelectorAll('.mood-img.dim').forEach(i => i.classList.remove('dim'));
     document.getElementById('mood-audio').pause();
-
     focusArea.style.display = 'none';
+
+    // 2) re-render & scroll up
     renderImages();
+    document.getElementById('mood-select-container')
+            .scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   focusArea.appendChild(btn);
