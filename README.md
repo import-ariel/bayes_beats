@@ -131,15 +131,15 @@ To avoid re-training the 3.3B parameters, we chose a fine-tuning approach called
 
 - LoRA keeps the **pre-trained model weights frozen**.
 - Instead of updating the full weight matrices (which are large and dense), LoRA **injects small trainable matrices** (called low-rank adapters) into certain layers (typically the attention layers) of the Transformer architecture.
-- The update to a weight matrix \( W_0 \) is expressed as:
-  \[
-  W = W_0 + \Delta W = W_0 + BA
-  \]
-  Where \( A \) and \( B \) are low-rank matrices (with rank \( r \ll d \), where \( d \) is the original size).
+- The update to a weight matrix $W_0$ is expressed as:
+  
+  $$W = W_0 + \Delta W = W_0 + BA$$
+  
+  Where $A$ and $B$ are low-rank matrices (with rank $r \ll d$, where $d$ is the original size).
 
 During training and backpropagation: 
-- Only the **small matrices \( A \) and \( B \) are updated during backpropagation**.
-- The original weights \( W_0 \) are not updated (remain frozen).
+- Only the **small matrices $A$ and $B$ are updated during backpropagation**.
+- The original weights $W_0$ are not updated (remain frozen).
 - This reduces GPU memory usage since gradients and optimizer states are only kept for a tiny subset of parameters.
 
 But we still faced huge issues when using this technique to fine-tune ACE-Step...
