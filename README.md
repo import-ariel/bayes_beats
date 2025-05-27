@@ -28,11 +28,18 @@ Create a model that can (a) generate music appropriate to a certain mood of an i
 
 Our foundational model is (ACE-STEP)[https://github.com/ace-step/ACE-Step?tab=readme-ov-file#-features]. ACE-STEP is a diffusion based text-to-music model that leverages a Deep Comprehssion Autencoder and a linnear transformer. ACE-STEP has several noteable features that distinguish it from other text-to-music models:
 
-1) What the creators refer to as a Deep Compression Autencoder (DCAE). During training the autocendoer encodes music into a latent space where it can be modeled. This autoencoder is different from traditional autoencoders in that it identifies the music's features that are most important for reconstructing music that matches a given prompt.
+1) What the creators refer to as a Deep Compression Autencoder (DCAE). During training the autocendoer encodes music into a latent space where it can be modeled. This autoencoder identifies the music's features that are most important for reconstructing music that matches a given prompt. Audio data has a large number of features, and many engineered features (like tempo and lyrics) are also used for training. The DCAE is specialized at reducing the feature space to those most needed for the training objective inorder to speed-up training.
 
 2) A diffusion model. Once the music is encoded, ACE-STEP adds noise to these encodings and then attempts to reconstruct the original encodings and in the processes it "learns" how to best approximate the latent space for music generation.
 
 3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. 
+
+4) Our proprosed addition to ACE-STEP was an added variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. 
+
+We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample. This would allow multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation.
+
+After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
+
 
 ### End-to-End Pipeline
 
