@@ -26,7 +26,13 @@ Create a model that can (a) generate music appropriate to a certain mood of an i
 
 #### Architecture Summary
 
-- High-level diagram and textual summary of project design.
+Our foundational model is (ACE-STEP)[https://github.com/ace-step/ACE-Step?tab=readme-ov-file#-features]. ACE-STEP is a diffusion based text-to-music model that leverages a Deep Comprehssion Autencoder and a linnear transformer. ACE-STEP has several noteable features that distinguish it from other text-to-music models:
+
+1) What the creators refer to as a Deep Compression Autencoder (DCAE). During training the autocendoer encodes music into a latent space where it can be modeled. This autoencoder is different from traditional autoencoders in that it identifies the music's features that are most important for reconstructing music that matches a given prompt.
+
+2) A diffusion model. Once the music is encoded, ACE-STEP adds noise to these encodings and then attempts to reconstruct the original encodings and in the processes it "learns" how to best approximate the latent space for music generation.
+
+3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. 
 
 ### End-to-End Pipeline
 
@@ -37,6 +43,10 @@ Create a model that can (a) generate music appropriate to a certain mood of an i
 ## Practice
 
 ### Datasets
+
+We are utilizing two datasets for our project, one with the labeled images from which users will select and another of music clips for fine-tuning. For images, we will be utilizing the 1-Million- Pairs-Image-Caption-Data-Of-General-Scenes dataset, available through Hugging Face. We will be using a 504 image sample where each real image contains a jpg and a description of the image which gives “the overall scene of the image, the details within the scene, and the emotions conveyed by the image.” Our sample images largely comprise of nature scenes, landscapes, and architecture, which we feel best represent the ‘lofi’ theme we are cultivating in our music samples.
+
+For music we will be using the MTG-JAMENDO dataset. Jamendo ove full audio tracks with 195 tags from and the tracks are available in MP3   which is a     o fine tune. The goal is to use the mood tags, which       for a specific track, to fine tune the model to approximate those with
 
 #### Image Dataset: 1-Million-Pairs-Image-Caption
 
