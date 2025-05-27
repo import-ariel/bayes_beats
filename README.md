@@ -4,29 +4,27 @@
 
 ## Abstract
 
-*Bayes’ Beats is a generative model that creates short music clips based on the “vibe” of a randomly selected image. Using a LoRA-fine-tuned ACE-Step model, we translate text descriptions of images into coherent musical outputs. To control the diversity and coherence of generated music, we introduce a Bayesian prior over the model’s latent space using a variational inference layer. Our training leverages the 1-Million-Pairs-Image-Caption dataset for images and the MTG-Jamendo dataset for music, focusing on mood and emotion alignment. This approach enables controllable, expressive music generation from visual input.*
+*Bayes’ Beats is a generative model that creates short music clips based on the “vibe” of a randomly selected image. Using a LoRA-fine-tuned ACE-Step model, we translate text descriptions of images into coherent musical outputs. Our training leverages the 1-Million-Pairs-Image-Caption dataset for images and the MTG-Jamendo dataset for music, focusing on mood and emotion alignment. The fine-tuned model generates controllable, expressive music generation from visual input. Our original aspirations were introduce a Bayesian prior over the model's latent space using a variational inference layer. Due to hardware issues we were unable to tackle this addition but we describe the theory and potential future steps below for future projects.
 
 ---
 
-## Introduction & Motivation
+## Theory
 
-- Overview of the problem space: why image-to-music?
-- Motivation for using Bayesian Machine Learning in generative modeling.
-- Use cases for mood-based music generation.
+### Introduction & Motivation
 
----
-
-## Problem Statement
-
-- Formal statement of mapping image "vibes" to music.
-- Challenges: coherence, diversity, controllability, lyric alignment.
-
+  The goal of Bayes Beats was is to generate music based on the "vibe" of a randomly selected image. Our inspiration was to generate lo-fi beats that fit a given mood for personal recreation and relaxation. We expanded our input space to be text description of specific images which opens up applications for situations where "themed" music is needed say for video games or unnarrated videos. The situation where a user wants music to fit a given "mood" or "vibe" is a good use-case because there is a lot of personal preference and inherent ambiguity present when trying to match music to textual mood or the mood of an image. By modeling the users preferences for different music as a distribution in the latent space and sampling from it, we hoped to train a model that would have a diverse appreciation for whihc tracks could potentially be a good fir for a particular users input.
 
 ---
 
-## Project Overview
+### Problem Statement
 
-### Architecture Summary
+Create a model that can (a) generate music appropriate to a certain mood of an image, and (b) give the model the ability to handle the ambiguity inherent in a users desire for music that matches an articulated mood.
+
+---
+
+### Project Overview
+
+#### Architecture Summary
 
 - High-level diagram and textual summary of project design.
 
@@ -36,17 +34,19 @@
 
 ---
 
-## Datasets
+## Practice
 
-### Image Dataset: 1-Million-Pairs-Image-Caption
+### Datasets
+
+#### Image Dataset: 1-Million-Pairs-Image-Caption
 
 - Description, size, relevance to project, sample structure.
 
-### Music Dataset: MTG-Jamendo
+#### Music Dataset: MTG-Jamendo
 
 - Description, tags/moods, why suitable for ACE-STEP, data structure.
 
-### Data Preprocessing
+#### Data Preprocessing
 We quickly realized our dataset was over 50GB; to avoid turning this into too much of a Big Data problem, we randomly sampled 284 songs from the dataset and uploaded them in a Google Cloud Storage (GC) bucket. 
 
 The ACE-Step developers created a script that converted the data into the correct format for fine-tuning. However, our raw files were not compatible with the script's ingestion; for starters, **we needed labeled vibes from our songs**!
