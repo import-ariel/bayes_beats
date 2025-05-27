@@ -5,15 +5,9 @@
  */
 
 const moodData = [
-  { img: '/bayes_beats/assets/images/moods/back_to_school.png',         audio: '/bayes_beats/assets/audio/moods/back_to_school.mp3' },
-  { img: '/bayes_beats/assets/images/moods/desert_gardens.jpg',          audio: '/bayes_beats/assets/audio/moods/desert_gardens.mp3' },
-  { img: '/bayes_beats/assets/images/moods/green_grass.jpeg',            audio: '/bayes_beats/assets/audio/moods/How_Do_I_Get_My_Grass_Really_Green.mp3' },
-  { img: '/bayes_beats/assets/images/moods/smoke_break.jpeg',            audio: '/bayes_beats/assets/audio/moods/smoke_break.mp3' },
-  { img: '/bayes_beats/assets/images/moods/take_me_down_the_hills.jpeg', audio: '/bayes_beats/assets/audio/moods/take_me_down_the_hills.mp3' },
-  { img: '/bayes_beats/assets/images/moods/bass.jpg',                    audio: '/bayes_beats/assets/audio/moods/feel_the_bass.mp3' },
-  { img: '/bayes_beats/assets/images/moods/gonna_be_fine.jpeg',          audio: '/bayes_beats/assets/audio/moods/gonna_be_fine.mp3' },
-  { img: '/bayes_beats/assets/images/moods/paris.jpg',                   audio: '/bayes_beats/assets/audio/moods/paris_streets.mp3' },
-  { img: '/bayes_beats/assets/images/moods/space_cyber_punk.jpg',        audio: '/bayes_beats/assets/audio/moods/space_cyberpunk.mp3' }
+  { img: '/bayes_beats/assets/images/moods/Image1.jpg',         audio: '/bayes_beats/assets/audio/moods/Image1_Music.mp3' },
+  { img: '/bayes_beats/assets/images/moods/Image2.jpg',          audio: '/bayes_beats/assets/audio/moods/Image2_Music.mp3' },
+  { img: '/bayes_beats/assets/images/moods/Image3.jpg',            audio: '/bayes_beats/assets/audio/moods/Image3_Music.wav' }
 ];
 
 function getRandomMoods() {
