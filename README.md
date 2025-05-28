@@ -24,15 +24,21 @@ Create a model that can (a) generate music appropriate to a certain mood of an i
 
 ### Project Overview
 
-#### Architecture Summary
+#### ACE-STEP Overview
 
-Our foundational model is (ACE-STEP)[https://github.com/ace-step/ACE-Step?tab=readme-ov-file#-features]. ACE-STEP is a diffusion based text-to-music model that leverages a Deep Comprehssion Autencoder and a linnear transformer. ACE-STEP has several noteable features that distinguish it from other text-to-music models:
+Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=readme-ov-file#-features). ACE-STEP is a diffusion based text-to-music model that leverages a Deep Comprehssion Autencoder and a linnear transformer. ACE-STEP has several noteable features that distinguish it from other text-to-music models:
 
 1) What the creators refer to as a Deep Compression Autencoder (DCAE). During training the autocendoer encodes music into a latent space where it can be modeled. This autoencoder identifies the music's features that are most important for reconstructing music that matches a given prompt. Audio data has a large number of features, and many engineered features (like tempo and lyrics) are also used for training. The DCAE is specialized at reducing the feature space to those most needed for the training objective inorder to speed-up training.
 
+(Image, mnusic data to a matrix)
+
 2) A diffusion model. Once the music is encoded, ACE-STEP adds noise to these encodings and then attempts to reconstruct the original encodings and in the processes it "learns" how to best approximate the latent space for music generation.
 
+(Diffusion image from class)
+
 3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. 
+
+(Check for a transformer)
 
 4) Our proprosed addition to ACE-STEP was an added variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. 
 
@@ -54,14 +60,6 @@ After the prompt embedding was computed we would pass it through two small feedf
 We are utilizing two datasets for our project, one with the labeled images from which users will select and another of music clips for fine-tuning. For images, we will be utilizing the 1-Million- Pairs-Image-Caption-Data-Of-General-Scenes dataset, available through Hugging Face. We will be using a 504 image sample where each real image contains a jpg and a description of the image which gives “the overall scene of the image, the details within the scene, and the emotions conveyed by the image.” Our sample images largely comprise of nature scenes, landscapes, and architecture, which we feel best represent the ‘lofi’ theme we are cultivating in our music samples.
 
 For music we will be using the MTG-JAMENDO dataset. Jamendo ove full audio tracks with 195 tags from and the tracks are available in MP3   which is a     o fine tune. The goal is to use the mood tags, which       for a specific track, to fine tune the model to approximate those with
-
-#### Image Dataset: 1-Million-Pairs-Image-Caption
-
-- Description, size, relevance to project, sample structure.
-
-#### Music Dataset: MTG-Jamendo
-
-- Description, tags/moods, why suitable for ACE-STEP, data structure.
 
 #### Data Preprocessing
 We quickly realized our dataset was over 50GB; to avoid turning this into too much of a Big Data problem, we randomly sampled 284 songs from the dataset and uploaded them in a Google Cloud Storage (GC) bucket. 
