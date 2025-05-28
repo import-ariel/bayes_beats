@@ -73,13 +73,13 @@ Evaluation: Prompt-Audio Alignment
 
 Our goal is to generate music that matches the "vibe" of a text prompt. We thus focus on evaluating how well the audio aligns with the prompt’s content—not just whether the model predicted the correct tokens. Our evaluation emphasizes cross-modal semantic similarity and includes the following steps:
 
-1. Text Prompt Embedding
+1. Text Prompt Embedding:
 We start by encoding the prompt using a pre-trained SentenceTransformer. This gives us a fixed-size vector that captures the semantic meaning of the prompt, which we use to condition the model during generation.
 
-2. Audio Generation
+2. Audio Generation:
 The model then generates a sequence of discrete audio tokens based on this prompt embedding. These tokens are decoded into a waveform using ACE-Step’s DCAE module, producing a final audio clip.
 
-3. CLAP-Based Similarity Evaluation
+3. CLAP-Based Similarity Evaluation:
 To measure how well the generated music matches the prompt, we use the CLAP (Contrastive Language–Audio Pretraining) model:
 
 - The original text prompt is passed through CLAP’s text encoder.
