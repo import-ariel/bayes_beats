@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/select.css">
 
-  <!-- Layout stretch override -->
+  <!-- Layout & image style overrides -->
   <style>
     body {
       margin: 0;
@@ -24,6 +24,7 @@
       margin: 0 auto;
       padding: 2rem;
       width: 100%;
+      max-width: 1000px;
       box-sizing: border-box;
       text-align: left;
     }
@@ -35,17 +36,28 @@
       }
     }
 
+    /* Full-width container for hero image */
     #background-container {
       position: relative;
       width: 100%;
     }
 
+    /* Hero/landing image spans full width */
     #landing-image {
       width: 100%;
       height: auto;
       display: block;
     }
 
+    /* All other images scale with content */
+    .wrapper img:not(#landing-image) {
+      max-width: 100%;
+      height: auto;
+      display: inline-block;
+      margin: 1rem 0;
+    }
+
+    /* Top nav buttons */
     #methodology-btn,
     #back-to-music-btn {
       position: absolute;
@@ -74,30 +86,16 @@
   {% elsif page.permalink == '/methodology/' %} class="methodology-page"
   {% endif %}
 >
-  <!-- Top-right and left nav buttons -->
+  <!-- Top nav buttons -->
   {% if page.permalink == '/methodology/' %}
     <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
   {% endif %}
   <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
 
-  <!-- Background portrait container -->
+  <!-- Background hero image -->
   <div id="background-container"
        {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
   >
     <img
       id="landing-image"
-      src="https://github.com/user-attachments/assets/6047ab36-561f-4652-95f7-b51c4c86b148"
-      alt="Portrait of Bayes"
-    >
-  </div>
-
-  <!-- Main page content -->
-  <main class="wrapper">
-    {{ content }}
-  </main>
-
-  <!-- JS scripts -->
-  <script src="{{ site.baseurl }}/assets/js/select.js"></script>
-  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
-</body>
-</html>
+      src="https://github.com/user-attachme
