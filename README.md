@@ -40,7 +40,16 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 
 (Check for a transformer)
 
-4) Our proprosed addition to ACE-STEP was an added variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. 
+## Proposed Changes
+
+(Check Mark)
+
+A) Fine Tune ACE-STEP on a dataset of music tags with descriptions of the "mood" or "vibe" of the music
+so that the model can be used to generate music in response to textual descriptions of mood.
+
+(X Mark)
+
+B) Add a variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. 
 
 We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample. This would allow multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation.
 
@@ -117,11 +126,9 @@ We fed this dataset, alongside the sampled audio files, to ACE-Step when fine-tu
 
 ---
 
-## Model Architecture
+## Fine Tuning
 
 ### ACE-STEP Foundation
-
-Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=readme-ov-file#-features), a new model as of May 2025 that generates music from text inputs. It is a diffusion model but is complemented by a  deep-compression auto-encoder and linear transformer.
 
 We fine-tuned this model on MTG-JAMENDO, a large dataset of annotated tracks that works has mood-specific labels. The goal of fine-tuning is to train ACE-STEP to be atuned to capturing "moods" in the songs it outputs. We use Low Rank Approximation methods, and only fine-tune the weights associated with the last generative layer.  
 
