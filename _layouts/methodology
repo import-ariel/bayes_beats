@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+
+  <!-- Your CSS files -->
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
+  <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/select.css">
+
+  <!-- Optional: Inline override to prevent center alignment -->
+  <style>
+    /* Prevent wrapper content from being center-aligned */
+    .wrapper {
+      margin: 0;
+      padding: 1rem;
+      text-align: left;
+      max-width: none;
+    }
+
+    /* Prevent flex centering on body (if applied elsewhere) */
+    body {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    #background-container {
+      position: relative;
+      width: 100%;
+    }
+
+    #landing-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #methodology-btn,
+    #back-to-music-btn {
+      display: inline-block;
+      margin: 1rem;
+    }
+  </style>
+</head>
+<body
+  {% if page.permalink == '/select.html' %} class="select-page"
+  {% elsif page.permalink == '/methodology/' %} class="methodology-page"
+  {% endif %}
+>
+  <!-- Top-right nav -->
+  <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
+
+  <!-- Back to Music (only on methodology page) -->
+  {% if page.permalink == '/methodology/' %}
+    <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
+  {% endif %}
+
+  <!-- Full-screen container for portrait → background -->
+  <div id="background-container"
+       {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
+  >
+    <img
+      id="landing-image"
+      src="https://github.com/user-attachments/assets/6047ab36-561f-4652-95f7-b51c4c86b148"
+      alt="Portrait of Bayes"
+    >
+  </div>
+
+  <!-- Your page content -->
+  <main class="wrapper">
+    {{ content }}
+  </main>
+
+  <!-- JS files -->
+  <script src="{{ site.baseurl }}/assets/js/select.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
+</body>
+</html>
