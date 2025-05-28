@@ -1,9 +1,3 @@
----
-layout: methodology
-title: Methodology
-permalink: /methodology/
----
-
 # Bayes’ Beats: Generating Music from Image Vibes
 
 ---
