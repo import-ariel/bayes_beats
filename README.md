@@ -61,6 +61,8 @@ B) Add a variational sampling layer that would have been placed between the prom
 - RMS Features, which capture the acerage loudness of the audio
 - Mel Spectogram features, which capture the frequency and pitch components of audio which humans are the most susceptible too
 
+One way to think of these features is like the "smile vector" that we saw in class. They let our model pick up on characteristics of music that seperate it from other audio.
+
 4) Encode the features and MP3 data into an "latent space" for music generation.
 
 5) Train the model using diffusion techniques. 
@@ -91,6 +93,8 @@ This combination allows us to focus both on the fidelity of the generated music 
 
 
 ## Practice
+
+Our data pre-processing pipeline and fine tuning were done in the [pipeline folder](/Users/gabrielbarrett/Code/Bayes/Project/bayesian_project/pipeline/ace_data_preprocessing.ipynb).
 
 ### Datasets
 
@@ -235,7 +239,7 @@ After 12+ hours of work, not including training time (that would be too easy!), 
 
 Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample.
 
-Samplling allows for multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation. After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
+Sampling allows for multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation. After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
 
 ## References
 
