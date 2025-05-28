@@ -30,24 +30,17 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 
 1) What the creators refer to as a Deep Compression Autencoder (DCAE). During training the autocendoer encodes music into a latent space where it can be modeled. This autoencoder identifies the music's features that are most important for reconstructing music that matches a given prompt. Audio data has a large number of features, and many engineered features (like tempo and lyrics) are also used for training. The DCAE is specialized at reducing the feature space to those most needed for the training objective inorder to speed-up training.
 
-(Image, mnusic data to a matrix)
-
 2) A diffusion model. Once the music is encoded, ACE-STEP adds noise to these encodings and then attempts to reconstruct the original encodings and in the processes it "learns" how to best approximate the latent space for music generation.
-
-(Diffusion image from class)
 
 3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. 
 
-(Check for a transformer)
 
 ## Proposed Changes
 
-(Check Mark)
 
 A) Fine Tune ACE-STEP on a dataset of music tags with descriptions of the "mood" or "vibe" of the music
 so that the model can be used to generate music in response to textual descriptions of mood.
 
-(X Mark)
 
 B) Add a variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. 
 
@@ -202,135 +195,6 @@ After 12+ hours of work, not including training time (that would be too easy!), 
 - `every_plot_step`: `1000000`
 - `every_n_train_steps`: `500`
   
-### Linear Transformer for Musical Coherence
-
-- How this approach maintains alignment and coherence across generated music.
-
-### Bayesian Prior over Latent Space
-
-#### Variational Inference Layer
-
-- Theoretical role and practical implementation.
-
-#### Multivariate Gaussian Prior
-
-- Initial assumption, adaptation using evidence from data.
-
----
-
-## Mathematical Formulation
-
-### Latent Variable Model
-
-- Definition of observed and latent variables.
-
-### Bayesian Priors and Regularization
-
-- Explanation of prior choice and its impact on learning.
-
-### Evidence Lower Bound (ELBO)
-
-- Mathematical loss formulation.
-
-### Variational Inference Derivation
-
-- Equations, figures, and technical explanation of inference process.
-
----
-
-## Implementation Details
-
-### Software Stack & Libraries
-
-- List of libraries, frameworks, and environments used.
-
-### Training Procedure
-
-- Data splits, batching, optimizer, and checkpointing.
-
-### Hyperparameters
-
-- Summary table or bullet list.
-
-### Fine-Tuning with Jamendo
-
-- Specifics on the music dataset integration.
-
-### Music Generation Pipeline
-
-- Detailed flow from image to music output.
-
-### Visualization and Evaluation Tools
-
-- Tools used for analysis and visualization.
-
----
-
-## Challenges & Solutions
-
-### Challenge 1: Ambiguous Image-to-Audio Mapping
-
-- Solution: Bayesian regularization and variational inference.
-
-### Challenge 2: Coherence vs. Diversity in Generated Music
-
-- Solution: Model/architecture tuning and hyperparameter adjustment.
-
-### Challenge 3: Data Alignment and Preprocessing
-
-- Solution: Specific preprocessing and alignment strategies.
-
-### Challenge 4: Model Training Stability
-
-- Solution: Training tricks and stability enhancements.
-
-### Other Challenges & Mitigations
-
-- Any additional technical or organizational obstacles.
-
----
-
-## Results
-
-### Qualitative Results: Sample Generations
-
-- Embedded links, sound files, or spectrograms.
-
-### Quantitative Metrics
-
-- Objective metrics and scores, if applicable.
-
-### User Study (if applicable)
-
-- Description and results.
-
-### Ablation Studies
-
-- Analysis of architecture/hyperparameter changes.
-
----
-
-## Discussion
-
-### Interpretation of Results
-
-- Insights from results and their meaning.
-
-### Limitations
-
-- Data/model/generalizability limitations.
-
-### Future Work
-
-- Extensions, alternative approaches, scalability.
-
----
-
-## Conclusion
-
-- Final summary and impact.
-
----
 
 ## References
 
