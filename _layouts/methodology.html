@@ -19,7 +19,6 @@
       color: white;
     }
 
-    /* Allow content to stretch across more of the screen */
     .wrapper {
       margin: 0 auto;
       padding: 2rem;
@@ -29,27 +28,23 @@
       text-align: left;
     }
 
-    /* Responsive tweaks for smaller screens */
     @media (max-width: 768px) {
       .wrapper {
         padding: 1rem;
       }
     }
 
-    /* Full-width container for hero image */
     #background-container {
       position: relative;
       width: 100%;
     }
 
-    /* Hero/landing image spans full width */
     #landing-image {
       width: 100%;
       height: auto;
       display: block;
     }
 
-    /* All other images scale with content */
     .wrapper img:not(#landing-image) {
       max-width: 100%;
       height: auto;
@@ -57,7 +52,21 @@
       margin: 1rem 0;
     }
 
-    /* Top nav buttons */
+    /* Custom size for pipeline image */
+    .pipeline-img {
+      max-width: 700px;
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 2rem auto;
+    }
+
+    @media (max-width: 768px) {
+      .pipeline-img {
+        max-width: 100%;
+      }
+    }
+
     #methodology-btn,
     #back-to-music-btn {
       position: absolute;
@@ -86,16 +95,32 @@
   {% elsif page.permalink == '/methodology/' %} class="methodology-page"
   {% endif %}
 >
-  <!-- Top nav buttons -->
   {% if page.permalink == '/methodology/' %}
     <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
   {% endif %}
   <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
 
-  <!-- Background hero image -->
   <div id="background-container"
        {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
   >
     <img
       id="landing-image"
-      src="https://github.com/user-attachme
+      src="https://github.com/user-attachments/example-hero-image.jpg"
+      alt="Landing"
+    >
+  </div>
+
+  <div class="wrapper">
+    <h1>Project Title or Overview</h1>
+
+    <p>Welcome to our project! Here's what we're exploring.</p>
+
+    <h2>Pipeline Overview</h2>
+    <img class="pipeline-img" src="https://github.com/user-attachments/example-pipeline.png" alt="Pipeline Diagram">
+
+    <p>Here's a detailed explanation of the pipeline and how it functions.</p>
+
+    <!-- More content goes here -->
+  </div>
+</body>
+</html>
