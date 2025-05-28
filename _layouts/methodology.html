@@ -5,25 +5,35 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
 
-  <!-- Your CSS files -->
+  <!-- Link to external CSS files -->
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/select.css">
 
-  <!-- Optional: Inline override to prevent center alignment -->
+  <!-- Layout stretch override -->
   <style>
-    /* Prevent wrapper content from being center-aligned */
-    .wrapper {
-      margin: 0;
-      padding: 1rem;
-      text-align: left;
-      max-width: none;
-    }
-
-    /* Prevent flex centering on body (if applied elsewhere) */
     body {
-      display: block;
       margin: 0;
       padding: 0;
+      font-family: sans-serif;
+      background-color: black;
+      color: white;
+    }
+
+    /* Allow content to stretch across more of the screen */
+    .wrapper {
+      margin: 0 auto;
+      padding: 2rem;
+      max-width: 1200px;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+    }
+
+    /* Responsive tweaks for smaller screens */
+    @media (max-width: 768px) {
+      .wrapper {
+        padding: 1rem;
+      }
     }
 
     #background-container {
@@ -39,8 +49,24 @@
 
     #methodology-btn,
     #back-to-music-btn {
-      display: inline-block;
-      margin: 1rem;
+      position: absolute;
+      top: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    #methodology-btn {
+      right: 1rem;
+      background-color: plum;
+      color: black;
+    }
+
+    #back-to-music-btn {
+      left: 1rem;
+      background-color: lightgreen;
+      color: black;
     }
   </style>
 </head>
@@ -49,15 +75,13 @@
   {% elsif page.permalink == '/methodology/' %} class="methodology-page"
   {% endif %}
 >
-  <!-- Top-right nav -->
-  <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
-
-  <!-- Back to Music (only on methodology page) -->
+  <!-- Top-right and left nav buttons -->
   {% if page.permalink == '/methodology/' %}
     <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
   {% endif %}
+  <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
 
-  <!-- Full-screen container for portrait → background -->
+  <!-- Background portrait container -->
   <div id="background-container"
        {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
   >
@@ -68,12 +92,12 @@
     >
   </div>
 
-  <!-- Your page content -->
+  <!-- Main page content -->
   <main class="wrapper">
     {{ content }}
   </main>
 
-  <!-- JS files -->
+  <!-- JS scripts -->
   <script src="{{ site.baseurl }}/assets/js/select.js"></script>
   <script src="{{ site.baseurl }}/assets/js/main.js"></script>
 </body>
