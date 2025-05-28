@@ -99,7 +99,7 @@ This combination allows us to focus both on the fidelity of the generated music 
 
 ## Implementation
 
-Our data pre-processing pipeline and fine tuning were done in the [pipeline folder](/Users/gabrielbarrett/Code/Bayes/Project/bayesian_project/pipeline/ace_data_preprocessing.ipynb).
+Our data pre-processing pipeline and fine tuning were done in the [pipeline folder](pipeline).
 
 ### Datasets
 
