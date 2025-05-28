@@ -19,7 +19,6 @@
       color: white;
     }
 
-    /* Allow content to stretch across more of the screen */
     .wrapper {
       margin: 0 auto;
       padding: 2rem;
@@ -28,7 +27,6 @@
       text-align: left;
     }
 
-    /* Responsive tweaks for smaller screens */
     @media (max-width: 768px) {
       .wrapper {
         padding: 1rem;
@@ -42,11 +40,11 @@
 
     #landing-image {
       width: 100%;
-      height: auto;
+      max-height: 100vh;
+      object-fit: cover;
       display: block;
     }
 
-    /* ✅ New: Ensure inline content images stay within wrapper */
     .wrapper img:not(#landing-image) {
       max-width: 100%;
       height: auto;
@@ -82,13 +80,11 @@
   {% elsif page.permalink == '/methodology/' %} class="methodology-page"
   {% endif %}
 >
-  <!-- Top-right and left nav buttons -->
   {% if page.permalink == '/methodology/' %}
     <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
   {% endif %}
   <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
 
-  <!-- Background portrait container -->
   <div id="background-container"
        {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
   >
@@ -99,4 +95,13 @@
     >
   </div>
 
-  <!-
+  <!-- ✅ Main content wrapper -->
+  <main class="wrapper">
+    {{ content }}
+  </main>
+
+  <!-- Optional JS -->
+  <script src="{{ site.baseurl }}/assets/js/select.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
+</body>
+</html>
