@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css">
   <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/select.css">
 
-  <!-- Layout & image style overrides -->
+  <!-- Layout stretch override -->
   <style>
     body {
       margin: 0;
@@ -19,15 +19,16 @@
       color: white;
     }
 
+    /* Allow content to stretch across more of the screen */
     .wrapper {
       margin: 0 auto;
       padding: 2rem;
       width: 100%;
-      max-width: 1000px;
       box-sizing: border-box;
       text-align: left;
     }
 
+    /* Responsive tweaks for smaller screens */
     @media (max-width: 768px) {
       .wrapper {
         padding: 1rem;
@@ -43,28 +44,6 @@
       width: 100%;
       height: auto;
       display: block;
-    }
-
-    .wrapper img:not(#landing-image) {
-      max-width: 100%;
-      height: auto;
-      display: inline-block;
-      margin: 1rem 0;
-    }
-
-    /* Custom size for pipeline image */
-    .pipeline-img {
-      max-width: 700px;
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 2rem auto;
-    }
-
-    @media (max-width: 768px) {
-      .pipeline-img {
-        max-width: 100%;
-      }
     }
 
     #methodology-btn,
@@ -95,32 +74,32 @@
   {% elsif page.permalink == '/methodology/' %} class="methodology-page"
   {% endif %}
 >
+  <!-- Top-right and left nav buttons -->
   {% if page.permalink == '/methodology/' %}
     <a id="back-to-music-btn" href="{{ site.baseurl }}/select.html">🎵 Back to Music</a>
   {% endif %}
   <a id="methodology-btn" href="{{ site.baseurl }}/methodology/">Methodology</a>
 
+  <!-- Background portrait container -->
   <div id="background-container"
        {% if page.permalink == '/select.html' or page.permalink == '/methodology/' %} class="background-mode"{% endif %}
   >
     <img
       id="landing-image"
-      src="https://github.com/user-attachments/example-hero-image.jpg"
-      alt="Landing"
+      src="https://github.com/user-attachments/assets/6047ab36-561f-4652-95f7-b51c4c86b148"
+      alt="Portrait of Bayes"
     >
   </div>
 
-  <div class="wrapper">
-    <h1>Project Title or Overview</h1>
+  <!-- Main page content -->
+  <main class="wrapper">
+    {{ content }}
+  </main>
 
-    <p>Welcome to our project! Here's what we're exploring.</p>
-
-    <h2>Pipeline Overview</h2>
-    <img class="pipeline-img" src="https://github.com/user-attachments/example-pipeline.png" alt="Pipeline Diagram">
-
-    <p>Here's a detailed explanation of the pipeline and how it functions.</p>
-
-    <!-- More content goes here -->
-  </div>
+  <!-- JS scripts -->
+  <script src="{{ site.baseurl }}/assets/js/select.js"></script>
+  <script src="{{ site.baseurl }}/assets/js/main.js"></script>
 </body>
 </html>
+
+
