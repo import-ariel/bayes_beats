@@ -51,7 +51,7 @@ B) Add a variational sampling layer that would have been placed between the prom
 
 ### Pipeline Overview
 
-![ACE-STEP Archietecture](images/ACE-Step_framework.png)
+![ACE-Step Architecture](https://github.com/user-attachments/assets/ac92ab92-fe9a-4bfa-81bc-5ece064aa3aa)
 
 1) Start with an MP3 File of music.
 
