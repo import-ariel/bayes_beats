@@ -9,7 +9,9 @@ Bayes’ Beats is a generative model that creates short music clips based on the
 ---
 
 ## Key Links
+
 Demo link [here](https://import-ariel.github.io/bayes_beats/)
+
 Github Repo [here](https://github.com/import-ariel/bayes_beats)
 
 ---
