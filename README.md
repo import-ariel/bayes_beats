@@ -32,7 +32,7 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 
 2) A diffusion model. Once the music is encoded, ACE-STEP adds noise to these encodings and then attempts to reconstruct the original encodings and in the processes it "learns" how to best approximate the latent space for music generation.
 
-3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. 
+3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. The transformer specifically draw attention to the lyrics and vocals when generating music so that the music is cohesive.
 
 
 ## Proposed Changes
@@ -41,19 +41,54 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 A) Fine Tune ACE-STEP on a dataset of music tags with descriptions of the "mood" or "vibe" of the music
 so that the model can be used to generate music in response to textual descriptions of mood.
 
-
-B) Add a variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. 
-
-We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample. This would allow multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation.
-
-After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
+B) Add a variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample. This would allow multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation. After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
 
 
-### End-to-End Pipeline
+### Pipeline Overview
 
-- Description of input, feature extraction, model inference, and output generation.
+![ACE-STEP Archietecture](/Users/gabrielbarrett/Code/Bayes/Project/bayesian_project/images/ACE-Step_framework.png)
 
----
+1) Start with an MP3 File of music.
+
+2) The Label is the music's vibe, we can get this from the songs tags but often the tags aren't sufficient so we use AI to lable the data. During training, we treat the label as a prompt and we encode it into its own vector space.
+
+3) Before Encoding the data we generate sefveral additional "features." These features let ACE-STEP capture the "essence" of music. These features are:
+- Tempo
+- Spectral features (wavlength, roll-off, bandwidth) that capture the intensity and wavelength of audio
+- MFCC features, which capture the "essential frequency" characteristics of audio
+- Chroma features, which captures the tonal content of the audio
+- ZCR, which measures the number of times an audio signal crosses the "zero amplitude" line
+- RMS Features, which capture the acerage loudness of the audio
+- Mel Spectogram features, which capture the frequency and pitch components of audio which humans are the most susceptible too
+
+4) Encode the features and MP3 data into an "latent space" for music generation.
+
+5) Train the model using diffusion techniques. 
+
+### Training Overview
+
+Evaluation: Prompt-Audio Alignment
+
+Our goal is to generate music that matches the "vibe" of a text prompt. We thus focus on evaluating how well the audio aligns with the prompt’s content—not just whether the model predicted the correct tokens. Our evaluation emphasizes cross-modal semantic similarity and includes the following steps:
+
+1. Text Prompt Embedding
+We start by encoding the prompt using a pre-trained SentenceTransformer. This gives us a fixed-size vector that captures the semantic meaning of the prompt, which we use to condition the model during generation.
+
+2. Audio Generation
+The model then generates a sequence of discrete audio tokens based on this prompt embedding. These tokens are decoded into a waveform using ACE-Step’s DCAE module, producing a final audio clip.
+
+3. CLAP-Based Similarity Evaluation
+To measure how well the generated music matches the prompt, we use the CLAP (Contrastive Language–Audio Pretraining) model:
+
+- The original text prompt is passed through CLAP’s text encoder.
+
+- The generated audio clip is passed through CLAP’s audio encoder.
+
+- We compute cosine similarity between the resulting embeddings.
+
+
+This combination allows us to focus both on the fidelity of the generated music and its alignment with the intended vibe which is essential in our goal of generating emotionally coherent music from image or text inputs.
+
 
 ## Practice
 
