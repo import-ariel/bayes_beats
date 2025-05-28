@@ -14,12 +14,12 @@ Bayes’ Beats is a generative model that creates short music clips based on the
 
 ---
 
-# Github Repo
+## Github Repo
 Please see the Github Repo [here](https://github.com/import-ariel/bayes_beats)
 
 ---
 
-### Introduction & Motivation
+## Introduction & Motivation
 
 The goal of Bayes Beats was to generate music based on the "vibe" of a randomly selected image. Our inspiration was to generate lo-fi beats that fit a given mood for personal recreation and relaxation. We expanded our input space to be text descriptions of specific images, which opens up applications for situations where "themed" music is needed, say for video games or unnarrated videos. The situation where a user wants music to fit a given "mood" or "vibe" is a good use case because there is a lot of personal preference and inherent ambiguity present when trying to match music to textual mood or the mood of an image. By modeling the users’ preferences for different music as a distribution in the latent space and sampling from it, we hoped to train a model that would have a diverse appreciation for which tracks could potentially be a good fit for a particular user’s input.
 
@@ -33,7 +33,7 @@ Create a model that can (a) generate music appropriate to a certain mood of an i
 
 ## Project Overview
 
-#### ACE-STEP Overview
+### ACE-STEP Overview
 
 Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=readme-ov-file#-features). ACE-STEP is a diffusion-based text-to-music model that leverages a Deep Compression Autencoder and a linear transformer. ACE-STEP has several notable features that distinguish it from other text-to-music models:
 
@@ -45,7 +45,6 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 
 
 ### Proposed Changes
-
 
 A) Fine-tune ACE-STEP on a dataset of music tags with descriptions of the "mood" or "vibe" of the music
 so that the model can be used to generate music in response to textual descriptions of mood.
@@ -207,7 +206,7 @@ During training and backpropagation:
 
 But we still faced large issues when using this technique to fine-tune ACE-Step...
 
-The first, and most time consuming issue, was **out of memory** errors. Because we were running this script on Google Colab, we only had access to 40 GB of VRAM. 
+The first, and most time-consuming issue, was **out of memory** errors. Because we were running this script on Google Colab, we only had access to 40 GB of VRAM. 
 
 To account for these errors, we: 
 
@@ -215,7 +214,7 @@ To account for these errors, we:
 2. Limited batch size to 1, and set accumulate_grad_batches to offset this
 3. Only fine-tuned lightweight LoRA/adapter layers, keeping backbone models in eval mode to save VRAM.
 4. Reduced the sequence length and feature dimensions in both the dataset and model configuration
-5. Turned of all unnecssary logging and callbacks (this will bite us later)
+5. Turned off all unnecessary logging and callbacks (this will bite us later)
 6. Regularly checked nvidia-smi/Colab VRAM usage and cleared the cache (torch.cuda.empty_cache()) between runs when necessary.
 7. Restarted the runtime as needed
 
@@ -254,8 +253,7 @@ Sampling allows for multiple musical interpretations of the same prompt and intr
 ## References
 
 Hu, E., Shen, Y., Wallis, P., et al. (2021). [LoRA: Low-Rank Adaptation of Large Language Models](https://github.com/microsoft/LoRA)
+
 Gong, J., Zhao, W., Wang, S., Xu, S., & Guo, J. (2025). *ACE-Step: A Step Towards Music Generation Foundation Model*. [GitHub repository](https://github.com/ace-step/ACE-Step)
 
 ---
-
-
