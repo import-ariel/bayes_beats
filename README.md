@@ -8,7 +8,6 @@
 
 ---
 
-## Theory
 
 ### Introduction & Motivation
 
@@ -22,7 +21,7 @@ Create a model that can (a) generate music appropriate to a certain mood of an i
 
 ---
 
-### Project Overview
+## Project Overview
 
 #### ACE-STEP Overview
 
@@ -35,7 +34,7 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 3) A linnear transformer. ACE-STEP uses a linear transformer so that music generation pays attention to the semantic meaning of a users input. The transformer also that every step of the music generation process to be foreward and backward looking. The transformer specifically draw attention to the lyrics and vocals when generating music so that the music is cohesive.
 
 
-## Proposed Changes
+### Proposed Changes
 
 
 A) Fine Tune ACE-STEP on a dataset of music tags with descriptions of the "mood" or "vibe" of the music
@@ -92,7 +91,7 @@ To measure how well the generated music matches the prompt, we use the CLAP (Con
 This combination allows us to focus both on the fidelity of the generated music and its alignment with the intended vibe which is essential in our goal of generating emotionally coherent music from image or text inputs.
 
 
-## Practice
+## Implementation
 
 Our data pre-processing pipeline and fine tuning were done in the [pipeline folder](/Users/gabrielbarrett/Code/Bayes/Project/bayesian_project/pipeline/ace_data_preprocessing.ipynb).
 
