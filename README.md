@@ -41,7 +41,7 @@ Our foundational model is [ACE-STEP](https://github.com/ace-step/ACE-Step?tab=re
 A) Fine Tune ACE-STEP on a dataset of music tags with descriptions of the "mood" or "vibe" of the music
 so that the model can be used to generate music in response to textual descriptions of mood.
 
-B) Add a variational sampling layer that would have been placed between the prompt encoded and the decoder. Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample. This would allow multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation. After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
+B) Add a variational sampling layer that would have been placed between the prompt encoded and the decoder. 
 
 
 ### Pipeline Overview
@@ -231,23 +231,16 @@ After 12+ hours of work, not including training time (that would be too easy!), 
 - `every_n_train_steps`: `500`
   
 
+## Suggested Improvements: Sampling from the Latent Space
+
+Out-of-the-box, ACE-Step generates music deterministically using a single, fixed embedding of the input prompt. This limits the diversity and flexibility of the generated outputs. We would have modeled the prompt embedding not as a single point in latent space, but as a distribution from which we can sample.
+
+Samplling allows for multiple musical interpretations of the same prompt and introduce a measure of uncertainty into generation. After the prompt embedding was computed we would pass it through two small feedforward networks to produce a mean vector and a log variance vector that would represent the distribution. We would then reparameterize in order to sample  from the distribution and enable backpropagation  and pass a sample from the distribution to the ACE-step decoder rather than the original prompt embedding. A KL divergence term added during training would penalize a model when the learned distribution would deviate too far from the distributional prior.
+
 ## References
 
 Hu, E., Shen, Y., Wallis, P., et al. (2021). [LoRA: Low-Rank Adaptation of Large Language Models](https://github.com/microsoft/LoRA)
 
 ---
 
-## Appendix
-
-### Figures & Technical Diagrams
-
-- All diagrams and technical illustrations.
-
-### Additional Mathematical Derivations
-
-- Extended derivations as needed.
-
-### Instructions for Reproducibility
-
-- Environment setup, running code, reproducing results.
 
