@@ -46,7 +46,7 @@ B) Add a variational sampling layer that would have been placed between the prom
 
 ### Pipeline Overview
 
-![ACE-STEP Archietecture](/Users/gabrielbarrett/Code/Bayes/Project/bayesian_project/images/ACE-Step_framework.png)
+![ACE-STEP Archietecture](images/ACE-Step_framework.png)
 
 1) Start with an MP3 File of music.
 
